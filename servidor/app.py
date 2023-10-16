@@ -8,6 +8,13 @@ countries = [
     {"id": 3, "name": "Egipto", "capital": "Cairo", "area": 1010408}
 ]
 
+def _findNextId():
+    return max(country["id"] for country in countries) +1
+
+@app.route("/")
+def index():
+    return "Hola :D"
+
 @app.get("/countries")
 def getCountry():
     return jsonify(countries)
@@ -30,3 +37,10 @@ if __name__=='__main__':
 def addCountry():
     if request.is_json:
         country = request.get_json()
+        country["id"] = _findNextId()
+        countries.append(country)
+        return country, 201
+    return{"error":"No valid format"}, 415
+
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=5050)
