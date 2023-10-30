@@ -4,5 +4,5 @@ from .cities.routes import citiesBP
 
 app = Flask (__name__)
 
-app.register_blueprint (countries BP, url_prefix='/countries')
+app.register_blueprint (countriesBP, url_prefix='/countries')
 app.register_blueprint (citiesBP, url_prefix='/cities')
