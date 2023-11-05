@@ -1,1 +1,23 @@
-[{"id": 1, "nombre": "Pedro", "apellidos": "Palardo Buiza", "NColegiado": 4, "Especialidad": "Cardiologia"}, {"id": 2, "nombre": "Luis", "apellidos": "Fasmo Fobia", "NColegiado": 5, "Especialidad": "Dermatolog\u00c3\u00ada"}, {"id": 3, "nombre": "Sandra", "apellidos": "Fanfa Ron", "NColegiado": 4, "Especialidad": "Odontolog\u00c3\u00ada"}]
+[
+    {
+        "id": 1,
+        "nombre": "Pedro",
+        "apellidos": "Palardo Buiza",
+        "NColegiado": 4,
+        "Especialidad": "Cardiologia"
+    },
+    {
+        "id": 2,
+        "nombre": "Luis",
+        "apellidos": "Fasmo Fobia",
+        "NColegiado": 5,
+        "Especialidad": "Dermatolog\u00c3\u00ada"
+    },
+    {
+        "id": 3,
+        "nombre": "Sandra",
+        "apellidos": "Fanfa Ron",
+        "NColegiado": 4,
+        "Especialidad": "Odontolog\u00c3\u00ada"
+    }
+]

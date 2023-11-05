@@ -1,1 +1,29 @@
-[{"id": 1, "dni": "123456789A", "Nombre": "Francisco", "Apellidos": "Somanta Palos", "SegSocial": "987654321", "FNacimiento": "1990-05-30", "idMedico": 1}, {"id": 2, "dni": "312412344B", "Nombre": "Lucia", "Apellidos": "Chupa Limones", "SegSocial": "234236623", "FNacimiento": "1993-12-22", "idMedico": 3}, {"id": 3, "dni": "466632443C", "Nombre": "Pula", "Apellidos": "Punta Redonda", "SegSocial": "538246794", "FNacimiento": "2000-23-01", "idMedico": 2}]
+[
+    {
+        "id": 1,
+        "dni": "123456789A",
+        "Nombre": "Francisco",
+        "Apellidos": "Somanta Palos",
+        "SegSocial": "987654321",
+        "FNacimiento": "1990-05-30",
+        "idMedico": 1
+    },
+    {
+        "id": 2,
+        "dni": "312412344B",
+        "Nombre": "Lucia",
+        "Apellidos": "Chupa Limones",
+        "SegSocial": "234236623",
+        "FNacimiento": "1993-12-22",
+        "idMedico": 3
+    },
+    {
+        "id": 3,
+        "dni": "466632443C",
+        "Nombre": "Pula",
+        "Apellidos": "Punta Redonda",
+        "SegSocial": "538246794",
+        "FNacimiento": "2000-23-01",
+        "idMedico": 2
+    }
+]
