@@ -14,10 +14,10 @@ def registerUsuario():
     usuarios = leeFichero(ficheroUsuarios)
     if request.is_json:
         usuario = request.get_json()
-        password = usuario['contrasena'].encode('utf-8')
+        contrasena = usuario['contrasena'].encode('utf-8')
         salt = bcrypt.gensalt()
-        hashPassword = bcrypt.hashpw(password, salt).hex()
-        usuario['password'] = hashPassword
+        hashContrasena = bcrypt.hashpw(contrasena, salt).hex()
+        usuario['contrasena'] = hashContrasena
         usuarios.append(usuario)
         escribeFichero(ficheroUsuarios, usuarios)
         token = create_access_token(identity=usuario['nombreUsuario'])
@@ -31,10 +31,10 @@ def loginUsuario():
         usuario = request.get_json()
         nombreUsuario = usuario['nombreUsuario']
         contrasena = usuario["contrasena"].encode('utf-8')
-        for usuarioFile in usuarios:
-            if usuarioFile['usuarioname'] == nombreUsuario:
-                contrasenaFile = usuarioFile['contrasena']
-                if bcrypt.checkpw(contrasena, bytes.fromhex(contrasenaFile)):
+        for userFile in usuarios:
+            if userFile['nombreUsuario'] == nombreUsuario:
+                passwordFile = userFile['contrasena']
+                if bcrypt.checkpw(contrasena, bytes.fromhex(passwordFile)):
                     token = create_access_token(identity=nombreUsuario)
                     return {'token': token}, 200
                 else:

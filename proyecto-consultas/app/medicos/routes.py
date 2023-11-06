@@ -1,3 +1,4 @@
+from flask_jwt_extended import jwt_required
 from utils.functions import *
 from flask import Blueprint, jsonify, request
 
@@ -29,6 +30,7 @@ def get_medico(id):
     return {"error": "Medico not found"}, 404
 
 @medicosBP.post("/")
+@jwt_required()
 # definimos la función correspondiente
 def add_medico():
     medicos = leeFichero(ficheroMedicos)
@@ -48,6 +50,7 @@ def add_medico():
 
 @medicosBP.put("/<int:id>")
 @medicosBP.patch("/<int:id>")
+@jwt_required()
 # definimos la función correspondiente
 def modify_medico(id):
     medicos = leeFichero(ficheroMedicos)
@@ -69,6 +72,7 @@ def modify_medico(id):
     return {"error": "Request must be JSON"}, 415
 
 @medicosBP.delete("/<int:id>")
+@jwt_required()
 # Se debe añadir como parámetro de entrada el id que se 
 # indica en la dirección
 def delete_medico(id):

@@ -1,3 +1,4 @@
+from flask_jwt_extended import jwt_required
 from utils.functions import *
 from flask import Blueprint, jsonify, request
 
@@ -28,6 +29,7 @@ def get_paciente(id):
     return {"error", "Paciente not found"}, 404
 
 @pacientesBP.post("/")
+@jwt_required()
 def add_paciente():
     pacientes = leeFichero(rutaFichero)
     if request.is_json:
@@ -40,6 +42,7 @@ def add_paciente():
 
 @pacientesBP.put("/<int:id>")
 @pacientesBP.patch("/<int:id>")
+@jwt_required()
 def modify_paciente(id):
     pacientes = leeFichero(rutaFichero)
     if request.is_json:
@@ -53,6 +56,7 @@ def modify_paciente(id):
     return {"error": "Request must be JSON"}, 415
 
 @pacientesBP.delete("/<int:id>")
+@jwt_required()
 def delete_paciente(id):
     pacientes = leeFichero(rutaFichero)
     for paciente in pacientes:
