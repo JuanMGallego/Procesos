@@ -53,7 +53,7 @@ def add_medico():
 @jwt_required()
 # definimos la función correspondiente
 def modify_medico(id):
-    medicos = leeFichero(ficheroMedicos)
+    medicos =    leeFichero(ficheroMedicos)
     # Se comprueba si la petición que nos ha llegado cumple con el formato json
     if request.is_json:
         # Creamos una variable donde guardamos el formato JSON, que coincide con un diccionario
