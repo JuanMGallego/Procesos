@@ -1,0 +1,56 @@
+import multiprocessing
+import time
+
+def leer_numeros(nombre_archivo, conn):
+    with open(nombre_archivo, 'r') as archivo:
+        for linea in archivo:
+            numero = int(linea.strip())
+            conn.send(numero)
+
+    # Enviar None para indicar que se han leído todos los números
+    conn.send(None)
+    conn.close()
+
+def suma_hasta_n_con_tuberias(conn):
+    suma = 0
+    while True:
+        numero = conn.recv()
+        if numero is None:
+            break
+        suma += numero
+    conn.close()
+    return suma
+
+if __name__ == "__main__":
+    # Nombre del archivo que contiene los números (uno por línea)
+    nombre_archivo = "ejercicio04/numeros.txt"
+
+    # Crear una tubería para la comunicación entre procesos
+    conn_leer, conn_sumar = multiprocessing.Pipe()
+
+    # Lanzar un proceso para leer los números del archivo y enviarlos a través de la tubería
+    proceso_lectura = multiprocessing.Process(target=leer_numeros, args=(nombre_archivo, conn_leer))
+    proceso_lectura.start()
+
+    # Lanzar un proceso para calcular la suma recibiendo los números a través de la tubería
+    proceso_suma = multiprocessing.Process(target=suma_hasta_n_con_tuberias, args=(conn_sumar,))
+
+    # Medir el tiempo de inicio
+    start_time = time.time()
+
+    # Iniciar el proceso de suma
+    proceso_suma.start()
+
+    # Esperar a que ambos procesos terminen
+    proceso_lectura.join()
+    proceso_suma.join()
+
+    # Obtener el resultado de la suma desde el proceso de suma
+    suma_total = proceso_suma.exitcode
+
+    # Medir el tiempo de finalización
+    end_time = time.time()
+
+    # Imprimir el resultado y el tiempo de ejecución
+    print(f"La suma de los números leídos del archivo es: {suma_total}")
+    print(f"Tiempo de ejecución: {end_time - start_time} segundos")
