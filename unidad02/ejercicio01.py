@@ -1,40 +1,36 @@
 import multiprocessing
 import time
 
-def sumaHastaN(n, resultadoCola):
-    suma = 0
-    for i in range(1, n + 1):
-        suma += i
-    resultadoCola.put(suma)
+# Método para sumar los números del rango introducido por parámetro
+def sumarNumeros(inicio, fin):
+    
+    resultado = sum(range(inicio, fin + 1))
+    print(f"La suma de los números desde {inicio} hasta {fin} es: {resultado}")
 
 if __name__ == "__main__":
 
-    valor = int(input("Introduce un valor: "))
-
-    # Crear una cola para obtener el resultado de cada proceso
-    resultadoCola = multiprocessing.Queue()
-
-    # Crear dos procesos para dividir el trabajo
-    process1 = multiprocessing.Process(target=sumaHastaN, args=(valor // 2, resultadoCola))
-    process2 = multiprocessing.Process(target=sumaHastaN, args=(valor, resultadoCola))
+    # Definir el rango de números para cada proceso
+    rangoProceso1 = (1, 50)
+    rangoProceso2 = (51, 100)
 
     # Medir el tiempo de inicio
     tiempoInicio = time.time()
 
+    # Crear los procesos
+    proceso1 = multiprocessing.Process(target=sumarNumeros, args=rangoProceso1)
+    proceso2 = multiprocessing.Process(target=sumarNumeros, args=rangoProceso2)
+
     # Iniciar los procesos
-    process1.start()
-    process2.start()
+    proceso1.start()
+    proceso2.start()
 
-    # Esperar a que ambos procesos terminen
-    process1.join()
-    process2.join()
-
-    # Obtener los resultados de la cola
-    sumaTotal = resultadoCola.get() + resultadoCola.get()
+    # Esperar a que todos los procesos terminen
+    proceso1.join()
+    proceso2.join()
 
     # Medir el tiempo de finalización
     tiempoFinal = time.time()
 
-    # Imprimir el resultado y el tiempo de ejecución
-    print(f"La suma de los números del 1 al {valor} es: {sumaTotal}")
+    # Mostrar el tiempo de ejecución
+    print("Todos los procesos han terminado.")
     print(f"Tiempo de ejecución: {tiempoFinal - tiempoInicio} segundos")

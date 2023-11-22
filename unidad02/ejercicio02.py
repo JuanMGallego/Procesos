@@ -1,39 +1,39 @@
-import multiprocessing
+from multiprocessing import Pool
 import time
 
-def sumarHastaNParcial(n):
-    suma = 0
-    for i in range(1, n + 1):
-        suma += i
-    return suma
+# Método para sumar los números del rango introducido por parámetro
+def sumarNumeros(args):
+    
+    inicio, fin = args
+    sumaParcial = sum(range(inicio, fin + 1))
+    print(f"La suma de los números desde {inicio} hasta {fin} es: {sumaParcial}")
+    return sumaParcial
 
 if __name__ == "__main__":
 
-    valor = int(input("Introduce un valor: "))
-
-    # Cambia el número de procesos según sea necesario
+    # Crear un Pool con el número deseado de procesos
     numProcesos = 4
+    pool = Pool(processes=numProcesos)
+
+    # Definir el rango de números para cada proceso
+    rangos = [(1, 25), (26, 50), (51, 75), (76, 100)]
 
     # Medir el tiempo de inicio
     tiempoInicio = time.time()
 
-    with multiprocessing.Pool(processes=numProcesos) as pool:
+    # Utilizar el Pool para realizar las sumas en paralelo
+    resultadosParciales = pool.map(sumarNumeros, rangos)
 
-        # Divide el rango de números en partes iguales para cada proceso
-        partes = [valor // numProcesos] * numProcesos
-        
-        # El último proceso se encarga de los posibles restos
-        partes[-1] += valor % numProcesos
+    # Cerrar el Pool y esperar a que todos los procesos terminen
+    pool.close()
+    pool.join()
 
-        # Calcula la suma de cada parte
-        resultParcial = pool.map(sumarHastaNParcial, partes)
-
-    # Combina los resultados parciales para obtener la suma total
-    sumaTotal = sum(resultParcial)
+    # Calcular la suma total
+    sumaTotal = sum(resultadosParciales)
 
     # Medir el tiempo de finalización
     tiempoFinal = time.time()
 
-    # Imprimir el resultado y el tiempo de ejecución
-    print(f"La suma de los números del 1 al {valor} es: {sumaTotal}")
+    # Imprimir la suma total y el tiempo de ejecución
+    print(f"La suma total de todos los procesos es: {sumaTotal}")
     print(f"Tiempo de ejecución: {tiempoFinal - tiempoInicio} segundos")

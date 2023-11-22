@@ -1,44 +1,44 @@
 import multiprocessing
-from multiprocessing import Process, Queue
+from multiprocessing import Process, Pipe
 import time
 
 # Método para leer los números del archivo
-def leerNumeros(archivo, cola):
+def leerNumeros(archivo, pipe):
 
     with open(archivo, 'r') as file:
         for line in file:
             numero = int(line.strip())
-            cola.put(numero)
-
+            pipe.send(numero)
+            
     # Indicar el final de la lectura con None
-    cola.put(None)
+    pipe.send(None)
 
 # Método para sumar los números del archivo
-def sumarNumeros(cola, resultado):
-    
+def sumarNumeros(pipe, resultado):
+
     while True:
-        numero = cola.get()
+        numero = pipe.recv()
         if numero is None:
             break
         resultado.value += numero
 
 if __name__ == "__main__":
-
-    # Crear una cola para la comunicación
-    cola = Queue()
+    
+    # Crear una tubería para la comunicación
+    pipeLectura, pipeSuma = Pipe()
 
     # Crear un objeto compartido para almacenar la suma total
     resultado = multiprocessing.Value("i", 0)
 
     # Definir el rango de números para cada proceso
-    archivo = "ejercicio03/numeros.txt"
+    archivo = "numeros.txt"
 
     # Medir el tiempo de inicio
     tiempoInicio = time.time()
 
     # Crear los procesos
-    procesoLectura = Process(target=leerNumeros, args=(archivo, cola))
-    procesoSuma = Process(target=sumarNumeros, args=(cola, resultado))
+    procesoLectura = Process(target=leerNumeros, args=(archivo, pipeLectura))
+    procesoSuma = Process(target=sumarNumeros, args=(pipeSuma, resultado))
 
     # Iniciar los procesos
     procesoLectura.start()
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     procesoLectura.join()
 
     # Esperar a que el proceso de suma termine
-    cola.put(None)  # Indicar al proceso de suma que debe terminar
+    pipeSuma.send(None)  # Indicar al proceso de suma que debe terminar
     procesoSuma.join()
 
     # Medir el tiempo de finalización
