@@ -1,47 +1,25 @@
-import multiprocessing
-import time
+from multiprocessing import Pool
 
-# Método para leer el archivo y contar cada vocal
-def contarVocal(vocal, archivo, resultadoCola):
-    with open(archivo, 'r') as archivo:
-        contenido = archivo.read()
-        contador = contenido.lower().count(vocal)
-        resultadoCola.put((vocal, contador))
+# Archivo con el texto a analizar
+archivo = "ejercicio01/vocales.txt"
 
+# Método para leer el archivo y devolver sus vocales
+def contarVocales(vocal):
+    with open(archivo, "r") as file:
+        contenido = file.read()
+        cont = contenido.count(vocal)
+    return cont
+
+# Main que llama al archivo por cada vocal
 if __name__ == "__main__":
-    # Nombre del archivo que contiene el texto
-    archivo = "ejercicio01/vocales.txt"
 
-    # Lista de vocales
+    # Array con las vocales por las que filtrar
     vocales = ['a', 'e', 'i', 'o', 'u']
 
-    # Crear una cola para compartir los resultados entre procesos
-    resultadoCola = multiprocessing.Queue()
+    # Se usa pool para lanzar varios procesos para dar valores distintos por cada vocal
+    with Pool(len(vocales)) as pool:
+        resultados = pool.map(contarVocales, vocales)
 
-    # Crear procesos para contar las vocales de forma paralela
-    procesos = [multiprocessing.Process(target=contarVocal, args=(vocal, archivo, resultadoCola)) for vocal in vocales]
 
-     # Medir el tiempo de inicio
-    tiempoInicio = time.time()
-
-    # Iniciar los procesos
-    for proceso in procesos:
-        proceso.start()
-
-    # Esperar a que todos los procesos terminen
-    for proceso in procesos:
-        proceso.join()
-
-    # Obtener los resultados de la cola
-    resultados = []
-    while not resultadoCola.empty():
-        resultados.append(resultadoCola.get())
-
-    # Medir el tiempo de finalización
-    tiempoFinal = time.time()
-
-    # Imprimir los resultados por pantalla
-    for vocal, contador in resultados:
-        print(f"La vocal '{vocal}' aparece {contador} veces en el archivo.")
-
-    print(f"Tiempo de ejecución: {tiempoFinal - tiempoInicio} segundos")
+    for vocal, veces in zip(vocales, resultados):
+        print(f"La vocal {vocal} aparece {veces} veces en el archivo.")
