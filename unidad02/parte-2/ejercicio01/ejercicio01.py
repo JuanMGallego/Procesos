@@ -20,6 +20,6 @@ if __name__ == "__main__":
     with Pool(len(vocales)) as pool:
         resultados = pool.map(contarVocales, vocales)
 
-
+    # Bucle para mostrar una linea con el resultado de cada vocal
     for vocal, veces in zip(vocales, resultados):
         print(f"La vocal {vocal} aparece {veces} veces en el archivo.")
