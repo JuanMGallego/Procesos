@@ -6,9 +6,8 @@ class Adivinador(Thread):
     numero_secreto = randint(0, 100)
     acertado = False
 
-    def __init__(self, nombre):
+    def __init__(self):
         Thread.__init__(self)
-        self.nombre = nombre
 
     def run(self):
 
@@ -19,4 +18,4 @@ class Adivinador(Thread):
             
             if (numero_aleatorio == Adivinador.numero_secreto):
                 Adivinador.acertado = True
-                print("El ", self.nombre, " ha acertado el numero secreto sacando un ", numero_aleatorio, "\nEl numero oculto es: ", Adivinador.numero_secreto)
+                print("Se ha acertado el numero secreto sacando un ", numero_aleatorio, "\nEl numero oculto es: ", Adivinador.numero_secreto)
