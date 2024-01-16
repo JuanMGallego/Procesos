@@ -1,0 +1,14 @@
+[
+    {"id":1, "nombre":"Clio", "precio":10000, "idMarca":1},
+    {"id":2, "nombre":"Ateka", "precio":20000, "idMarca":1},
+    {"id":3, "nombre":"Megane", "precio":15000, "idMarca":1},
+
+    {"id":4, "nombre":"Ibiza", "precio":11000, "idMarca":2},
+    {"id":5, "nombre":"Arona", "precio":18000, "idMarca":2},
+    {"id":6, "nombre":"Leon", "precio":13000, "idMarca":2},
+
+    {"id":7, "nombre":"Focus", "precio":17000, "idMarca":3},
+    {"id":8, "nombre":"Mondeo", "precio":16000, "idMarca":3},
+    {"id":9, "nombre":"Fiesta", "precio":14000, "idMarca":3}
+    
+]
