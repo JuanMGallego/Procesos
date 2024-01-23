@@ -1,9 +1,9 @@
-from adivinador import *
+from cliente import *
 
 if __name__ == "__main__":
     lista = []
     for i in range(20):
-        hilo = Adivinador(str(i))
+        hilo = Cliente(str(i))
         hilo.start()
         lista.append(hilo)
 

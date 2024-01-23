@@ -19,5 +19,5 @@ class Adivinador(Thread):
             
             if (numero_aleatorio == Adivinador.numero_secreto):
                 Adivinador.acertado = True
-                print("El ", self.name, " ha acertado el numero secreto sacando un ", numero_aleatorio, "\nEl numero oculto es: ", Adivinador.numero_secreto)
+                print("El hilo", self.name, "ha acertado el numero secreto sacando un", numero_aleatorio, "\nEl numero oculto es:", Adivinador.numero_secreto)
                 Adivinador.l.locked
