@@ -1,9 +1,9 @@
-from threading import Thread, Lock
+from threading import Thread, Semaphore
 from random import randint
 import time
 
 class Cliente(Thread):
-    l = Lock()
+    s = Semaphore(4)
 
     def __init__(self, nombre):
         Thread.__init__(self, name = nombre)
@@ -12,10 +12,9 @@ class Cliente(Thread):
 
         print("El cliente", self.name, "se ha puesto en la cola.")
 
-        Cliente.l.acquire()
+        Cliente.s.acquire()
         print("El cliente", self.name, "esta siendo atendido.")
-        time.sleep(randint(1, 5))
+        time.sleep(randint(1, 10))
 
-        Cliente.l.release()
-        print("El cliente", self.name, "se ha marchado.")
-        
+        Cliente.s.release()
+        print("El cliente", self.name, "ha terminado en la carniceria.")
