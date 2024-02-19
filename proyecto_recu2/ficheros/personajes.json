@@ -1,0 +1,50 @@
+[
+  {
+    "id_personaje": 1,
+    "nombre_real": "Peter Benjamin Parker",
+    "nombre_superheroe": "Spiderman",
+    "tipo": "Heroe",
+    "afiliacion": "Los Vengadores",
+    "id_comic": 1
+  },
+  {
+    "id_personaje": 2,
+    "nombre_real": "Adrian Toomes",
+    "nombre_superheroe": "Buitre",
+    "tipo": "Villano",
+    "afiliacion": "Los 12 Siniestros",
+    "id_comic": 1
+  },
+  {
+    "id_personaje": 3,
+    "nombre_real": "Norman Osborn",
+    "nombre_superheroe": "Duende Verde",
+    "tipo": "Villano",
+    "afiliacion": "La Mano",
+    "id_comic": 1
+  },
+  {
+    "id_personaje": 4,
+    "nombre_real": "Bruce Wayne",
+    "nombre_superheroe": "Batman",
+    "tipo": "Heroe",
+    "afiliacion": "La Liga de la Justicia",
+    "id_comic": 2
+  },
+  {
+    "id_personaje": 5,
+    "nombre_real": "Jack Oswald White",
+    "nombre_superheroe": "Joker",
+    "tipo": "Villano",
+    "afiliacion": "Liga de la Injusticia",
+    "id_comic": 2
+  },
+  {
+    "id_personaje": 6,
+    "nombre_real": "Oswald Cobblepot",
+    "nombre_superheroe": "El Pingüino",
+    "tipo": "Villano",
+    "afiliacion": "La Sociedad",
+    "id_comic": 2
+  }
+]

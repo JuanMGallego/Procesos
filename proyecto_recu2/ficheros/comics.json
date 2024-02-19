@@ -1,0 +1,16 @@
+[
+    {
+      "id_comic": 1, 
+      "título" : "Spiderman", 
+      "descripcion": "Se trata de un superhéroe que emplea sus habilidades sobrehumanas, reminiscentes de una araña, para combatir a otros supervillanos que persiguen fines siniestros.",
+      "n_capítulos":133, 
+      "autor":"Stan Lee"
+    },
+    {
+      "id_comic": 2, 
+      "título" : "Batman", 
+      "descripcion": "Es un legendario vigilante que lucha contra el crimen en Ciudad Gótica, y un miembro fundador de la Liga de la Justicia. Él es el mentor de Robin, y es responsable de asignar las misiones a El Equipo.",
+      "n_capítulos":109, 
+      "autor":"Bob Kane"
+    }
+  ]

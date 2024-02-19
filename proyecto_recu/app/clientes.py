@@ -10,16 +10,11 @@ clientesBP = Blueprint("clientes", __name__)
 #Get anidado para pedidr la info del pedido x del cliente y
 @clientesBP.get("/<int:id_cliente>/pedidos/<int:id_pedido>")
 def get_pedido_cliente(id_cliente, id_pedido):
-    clientes = leeFichero(rutaClientes)
     pedidos = leeFichero(rutaPedidos)
-
-    for cliente in clientes:
-        if cliente["id_cliente"] == id_cliente:
-            for pedido in pedidos:
-                if pedido["id_pedido"] == id_pedido:
-                    return jsonify(pedido), 200
+    for pedido in pedidos:
+        if pedido["id_cliente"] == id_cliente and pedido["id_pedido"] == id_pedido:
+            return jsonify(pedido), 200
     return {"error":"Pedido no encontrado"}, 404
-
 
 #Get para sumar el total de los pedidos por un cliente
 @clientesBP.get("/<int:id_cliente>/total")
