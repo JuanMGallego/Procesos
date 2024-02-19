@@ -10,7 +10,7 @@ alphabet = string.ascii_letters + string.digits
 password = ''.join(secrets.choice(alphabet) for i in range(8))
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'ClAvEsEcReTa2004!'
+app.config['SECRET_KEY'] = password
 jwt = JWTManager(app)
 
 app.register_blueprint(clientesBP, url_prefix="/clientes")

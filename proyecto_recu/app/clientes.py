@@ -5,7 +5,7 @@ from flask import Blueprint, jsonify, request
 rutaClientes = "ficheros/clientes.json"
 rutaPedidos = "ficheros/pedidos.json"
 
-clientesBP = Blueprint("clientes", rutaClientes)
+clientesBP = Blueprint("clientes", __name__)
 
 #Get anidado para pedidr la info del pedido x del cliente y
 @clientesBP.get("/<int:id_cliente>/pedidos/<int:id_pedido>")
@@ -39,7 +39,7 @@ def get_total_cliente(id_cliente):
 
 #Put para editar un cliente y añadirlo si no existe
 @clientesBP.put("/<int:id_cliente>")
-@jwt_required
+@jwt_required()
 def modify_cliente(id):
     clientes = leeFichero(rutaClientes)
     # Se comprueba si la petición es json
@@ -67,7 +67,7 @@ def modify_cliente(id):
 
 #Delete para eliminar un cliente
 @clientesBP.delete("/<int:id_cliente>")
-@jwt_required
+@jwt_required()
 def delete_cliente(id_cliente):
     clientes = leeFichero(rutaClientes)
     pedidos = leeFichero(rutaPedidos)

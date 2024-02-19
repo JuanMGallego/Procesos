@@ -1,5 +1,5 @@
 import requests
-api_url = "https://localhost:5050/users"
+api_url = "http://localhost:5050/users"
 
 pedido = {"username":"juanma", "password":"ClAvEsEcReTa2004!"}
 response = requests.post(api_url, json=pedido)
